@@ -1,0 +1,38 @@
+[Unit]
+Description=OpenClaw Light
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=openclaw
+Group=openclaw
+WorkingDirectory=/opt/openclaw
+
+# ── 启动 ──
+ExecStart=/opt/openclaw/openclaw-light --config /opt/openclaw/openclaw.json
+Restart=on-failure
+RestartSec=10
+EnvironmentFile=/opt/openclaw/.env
+
+# ── 安全加固 ──
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+
+# ── 文件系统权限 ──
+ReadWritePaths=/opt/openclaw/sessions /opt/openclaw/memory /opt/openclaw/skills /opt/openclaw/backups /opt/openclaw/auth_tokens.json
+ReadOnlyPaths=/opt/openclaw/openclaw-light /opt/openclaw/openclaw.json
+
+# ── 资源限制 ──
+MemoryMax=32M
+MemoryHigh=24M
+
+# ── 日志 ──
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=openclaw
+
+[Install]
+WantedBy=multi-user.target

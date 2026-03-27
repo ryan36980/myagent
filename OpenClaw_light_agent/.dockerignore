@@ -1,0 +1,34 @@
+# Build artifacts
+target/
+dist/
+
+# Documentation (not needed in build)
+docs/
+
+# Tests — included for the tester stage; builder stage does not use them
+# tests/
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Host cargo config (Dockerfile generates its own for the target image)
+.cargo/
+
+# Git
+.git/
+.gitignore
+
+# CI / scripts (not needed in build image)
+scripts/
+docker-compose*.yml
+
+# Config examples and sessions
+config/
+sessions/
+
+# Misc
+*.md
+LICENSE

@@ -1,0 +1,21 @@
+{
+  "id": "chatcmpl-multi789",
+  "object": "chat.completion",
+  "created": 1700000002,
+  "model": "llama-3.3-70b-versatile",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Done! I've turned on the living room light for you."
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 120,
+    "completion_tokens": 12,
+    "total_tokens": 132
+  }
+}

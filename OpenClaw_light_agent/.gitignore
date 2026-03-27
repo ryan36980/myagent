@@ -1,0 +1,28 @@
+# Build artifacts
+/target/
+/dist/
+/openclaw-light
+*.log
+
+# Runtime data
+/sessions/
+/memory/
+/skills/
+/backups/
+
+# Environment / secrets
+.env
+.env.*
+openclaw.json
+auth_tokens.json
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,31 @@
+{
+  "id": "chatcmpl-tool456",
+  "object": "chat.completion",
+  "created": 1700000001,
+  "model": "llama-3.3-70b-versatile",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "call_abc123",
+            "type": "function",
+            "function": {
+              "name": "ha_control",
+              "arguments": "{\"entity_id\":\"light.living_room\",\"action\":\"turn_on\"}"
+            }
+          }
+        ]
+      },
+      "finish_reason": "tool_calls"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 50,
+    "completion_tokens": 30,
+    "total_tokens": 80
+  }
+}

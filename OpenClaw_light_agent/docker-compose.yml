@@ -1,0 +1,30 @@
+services:
+  gateway:
+    image: openclaw-light:latest
+    container_name: openclaw-light
+    restart: unless-stopped
+    read_only: true
+    cap_drop: [ALL]
+    cap_add: [CHOWN, SETUID, SETGID]
+    mem_limit: 10m
+    ports:
+      - "8080:8080"
+    tmpfs:
+      - /tmp:size=10m
+    volumes:
+      # 配置文件（只读挂载）
+      - ./openclaw.json:/app/openclaw.json:ro
+      # 数据目录（路径与 openclaw.json 中的默认值对应，一般不需要修改）
+      # session.dir = "./sessions"
+      - ./sessions:/app/sessions
+      # memory.dir = "./memory"
+      - ./memory:/app/memory
+      # exec.skillsDir = "./skills"
+      - ./skills:/app/skills
+      # backup.dir = "./backups"
+      - ./backups:/app/backups
+      # auth.tokenFile = "./auth_tokens.json"
+      - ./auth_tokens.json:/app/auth_tokens.json
+    env_file:
+      # API Keys 等敏感信息（TELEGRAM_BOT_TOKEN, ANTHROPIC_API_KEY 等）
+      - .env

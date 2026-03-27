@@ -1,0 +1,30 @@
+#!/bin/bash
+# Pre-push hook: lightweight checks only (heavy tests belong in CI)
+# Skip with: git push --no-verify
+#
+# Setup: git config core.hooksPath hooks
+
+echo "==> pre-push: running quick checks ..."
+
+# Build-check only (no tests, no Docker) — catches compile errors fast
+# Uses the cached Docker builder stage
+BUILD_OUTPUT=$(MSYS_NO_PATHCONV=1 docker build \
+  --target builder \
+  --build-arg MUSL_TARGET=x86_64-musl \
+  -t openclaw:check \
+  . 2>&1) || true
+
+if echo "$BUILD_OUTPUT" | grep -qiE "^ERROR|error\[E|error: could not compile"; then
+  echo "==> pre-push: compilation FAILED."
+  echo "$BUILD_OUTPUT"
+  exit 1
+fi
+
+if echo "$BUILD_OUTPUT" | grep -q "naming to docker.io/library/openclaw:check"; then
+  echo "==> pre-push: compilation OK."
+  exit 0
+fi
+
+echo "==> pre-push: could not determine build result."
+echo "$BUILD_OUTPUT"
+exit 1

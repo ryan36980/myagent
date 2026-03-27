@@ -1,0 +1,21 @@
+{
+  "id": "ollama-abc123",
+  "object": "chat.completion",
+  "model": "qwen2.5:14b",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "你好！我是本地运行的 Qwen 模型，有什么可以帮你的？"
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 10,
+    "completion_tokens": 20,
+    "total_tokens": 30
+  }
+}
